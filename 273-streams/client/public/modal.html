@@ -1,0 +1,65 @@
+<head>
+  <style>
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 300px;
+      background-color: green;
+    }
+
+    .content {
+      margin-left: 300px;
+    }
+
+    .modal-body {
+      background-color: white;
+      margin: auto;
+      height: 30%;
+      width: 30%;
+    }
+
+    .modal {
+      height: 100%;
+      width: 100%;
+      position: fixed;
+      background-color: grey;
+      left: 0;
+      top: 0;
+      z-index: 10;
+    }
+
+    .positioned {
+      position: relative;
+      z-index: 0;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="positioned">
+    <div class="modal">
+      <div class="modal-body">
+        <h1>I am a modal</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar">I am a sidebar</div>
+  <div class="content">
+    <h1>I am some content</h1>
+  </div>
+</body>
+
+
+<!--
+The modal issue: the modal is a pop up window. Example, when deleting, the modal pops up, and asks if we are sure, are
+we really want to delete? YES NO. This is a modal.
+Problem with modals: If the StreamDelete component displays a modal directly, there will be a problem. Because the
+StreamDelete component sits on bunch of other components, and has inherited a bunch od CSS code from these other
+components. Thing can go sideways.
+Solution: StreamDelete should call a modal, and this modal should not be attached to StreamDelete (who already has
+inherited a lot of CSS), but to the main base <body> tag of the app, that most surely didn't inherit CSS from anybody.
+Modal will become a direct child of the body. To achieve this, we use portals.
+-->
